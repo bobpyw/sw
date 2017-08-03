@@ -4,7 +4,7 @@ var urlsToCache = [
     './inline.bundle.js',
     './main.bundle.js',
     './polyfills.bundle.js',
-    './style.bundle.js',
+    './styles.bundle.js',
     './vendor.bundle.js'
 ];
 
