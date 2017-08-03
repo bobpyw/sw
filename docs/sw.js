@@ -14,7 +14,13 @@ self.addEventListener('install', function(event) {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+        return cache.addAll(urlsToCache).then(function () {
+
+            registration.showNotification("New email", {
+                body: "Cached all files",
+                tag: "new-email"
+            });
+        })
       })
   );
 });
@@ -45,12 +51,17 @@ self.addEventListener('fetch', function(event) {
             }
         )
 
-
-
-
         return fetch(event.request);
       }
     )
   );
 });
 
+self.addEventListener('notificationclick', function(event) {
+  if (event.notification.tag == 'new-email') {
+    // Assume that all of the resources needed to render
+    // /inbox/ have previously been cached, e.g. as part
+    // of the install handler.
+    new WindowClient('/');
+  }
+});
