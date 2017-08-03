@@ -25,10 +25,13 @@ self.addEventListener('fetch', function(event) {
       .then(function(response) {
         // Cache hit - return response
         if (response) {
-            registration.showNotification("New email", {
-                body: "Hit Caches",
-                tag: "new-email"
-            });
+            Notification.requestPermission().then(function () {
+                registration.showNotification("New email", {
+                    body: "Hit Caches",
+                    tag: "new-email"
+                });
+            })
+            
           return response;
         }
 
