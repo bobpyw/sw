@@ -14,13 +14,7 @@ self.addEventListener('install', function(event) {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         console.log('Opened cache');
-        return cache.addAll(urlsToCache).then(function () {
-
-            registration.showNotification("New email", {
-                body: "Cached all files",
-                tag: "new-email"
-            });
-        })
+        return cache.addAll(urlsToCache)
       })
   );
 });
@@ -49,7 +43,13 @@ self.addEventListener('fetch', function(event) {
                     })
                 return response;
             }
-        )
+        ).then(function () {
+
+            registration.showNotification("New email", {
+                body: "Cached all files",
+                tag: "new-email"
+            });
+        })
 
         return fetch(event.request);
       }
