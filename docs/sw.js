@@ -74,17 +74,17 @@ self.addEventListener('notificationclick', function(event) {
     event.notification.close();
     if (event.notification.tag == 'new-email') {
     
-    event.waitUntil(clients.matchAll({
-        type: "window"
-    }).then(function(clientList) {
-        for (var i = 0; i < clientList.length; i++) {
-        var client = clientList[i];
-        if (client.url == '/' && 'focus' in client)
-            return client.focus();
-        }
-        if (clients.openWindow)
-        return clients.openWindow('/');
-    }));
+        event.waitUntil(clients.matchAll({
+            type: "window"
+        }).then(function(clientList) {
+            for (var i = 0; i < clientList.length; i++) {
+            var client = clientList[i];
+            if (client.url == '/' && 'focus' in client)
+                return client.focus();
+            }
+            if (clients.openWindow)
+            return clients.openWindow('/sw/');
+        }));
     
         // Assume that all of the resources needed to render
     // /inbox/ have previously been cached, e.g. as part

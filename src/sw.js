@@ -83,7 +83,7 @@ self.addEventListener('notificationclick', function(event) {
                 return client.focus();
             }
             if (clients.openWindow)
-            return clients.openWindow('/');
+            return clients.openWindow('/sw/');
         }));
     
         // Assume that all of the resources needed to render
