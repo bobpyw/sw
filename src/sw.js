@@ -26,15 +26,7 @@ self.addEventListener('fetch', function(event) {
         // Cache hit - return response
         if (response) {
 
-            navigator.permissions.query({name: 'notifications'})
-                .then(function (permissionStatus){
-                    console.log('notifications permission status is ', permissionStatus);
-
-                    permissionStatus.onChange = function () {
-                        console.log('notifications permission status has changed to ', this.state);
-
-                    }
-                })
+            
 
             Notification.requestPermission(function (result) {
                 
