@@ -18,7 +18,7 @@
       Notification.requestPermission().then((result) => {
         if (result == 'granted'){
           navigator.serviceWorker.ready.then((registeration) => {
-            registration.showNavigation('Notification with servicework');
+            registeration.showNavigation('Notification with servicework');
           })
         }
       })
