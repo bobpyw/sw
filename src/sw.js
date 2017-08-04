@@ -70,10 +70,25 @@ self.addEventListener('fetch', function(event) {
 
 
 self.addEventListener('notificationclick', function(event) {
-  if (event.notification.tag == 'new-email') {
-    // Assume that all of the resources needed to render
+  
+    event.notification.close();
+    if (event.notification.tag == 'new-email') {
+    
+        event.waitUntil(clients.matchAll({
+            type: "window"
+        }).then(function(clientList) {
+            for (var i = 0; i < clientList.length; i++) {
+            var client = clientList[i];
+            if (client.url == '/' && 'focus' in client)
+                return client.focus();
+            }
+            if (clients.openWindow)
+            return clients.openWindow('/');
+        }));
+    
+        // Assume that all of the resources needed to render
     // /inbox/ have previously been cached, e.g. as part
     // of the install handler.
-    new WindowClient('/');
+    //new WindowClient('/');
   }
 });
