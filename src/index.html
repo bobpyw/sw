@@ -13,7 +13,16 @@
 </body>
 <script>
   navigator.serviceWorker.register('/sw/sw.js')
-    .then(reg => console.log('SW registered!', reg))
+    .then(reg => {
+      console.log('SW registered!', reg)
+      Notification.requestPermission().then((result) => {
+        if (result == 'granted'){
+          navigator.serviceWorker.ready.then((registeration) => {
+            registration.showNavigation('Notification with servicework');
+          })
+        }
+      })
+    })
     .catch(err => console.log('Boo!', err));
 </script>
 </html>

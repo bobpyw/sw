@@ -28,23 +28,10 @@ self.addEventListener('fetch', function(event) {
 
             
 
-            Notification.requestPermission(function (result) {
-                
-                if (result == 'denied') {
-                    console.log('Permission wasn\'t granted. Allow a retry');
-                    return ;
-
-                } else if (result == 'default') {
-                    console.log('The permission request was dismissed');
-                    return;
-                }
-                
-                console.log('Permission was granted for notifications')
-                registration.showNotification("New email", {
+           registration.showNotification("New email", {
                     body: "Hit Caches",
                     tag: "new-email"
                 });
-            })
             
             
           return response;
@@ -78,6 +65,9 @@ self.addEventListener('fetch', function(event) {
     )
   );
 });
+
+
+
 
 self.addEventListener('notificationclick', function(event) {
   if (event.notification.tag == 'new-email') {
