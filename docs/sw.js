@@ -25,12 +25,35 @@ self.addEventListener('fetch', function(event) {
       .then(function(response) {
         // Cache hit - return response
         if (response) {
-            Notification.requestPermission().then(function () {
+
+            navigator.permissions.query({name: 'notifications'})
+                .then(function (permissionStatus){
+                    console.log('notifications permission status is ', permissionStatus);
+
+                    permissionStatus.onChange = function () {
+                        console.log('notifications permission status has changed to ', this.state);
+
+                    }
+                })
+
+            Notification.requestPermission(function (result) {
+                
+                if (result == 'denied') {
+                    console.log('Permission wasn\'t granted. Allow a retry');
+                    return ;
+
+                } else if (result == 'default') {
+                    console.log('The permission request was dismissed');
+                    return;
+                }
+                
+                console.log('Permission was granted for notifications')
                 registration.showNotification("New email", {
                     body: "Hit Caches",
                     tag: "new-email"
                 });
             })
+            
             
           return response;
         }
