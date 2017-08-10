@@ -5,7 +5,11 @@ var urlsToCache = [
     './main.bundle.js',
     './polyfills.bundle.js',
     './styles.bundle.js',
-    './vendor.bundle.js'
+    './vendor.bundle.js',
+    './assets/launcher-icon-4x.png',
+    './assets/launcher-icon-2x.png',
+    './assets/launcher-icon-1x.png',
+    './manifest.json'
 ];
 
 self.addEventListener('install', function(event) {
