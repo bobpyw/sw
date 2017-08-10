@@ -4,9 +4,11 @@
   <meta charset="utf-8">
   <title>Sw</title>
   <base href="/sw/">
+  <!-- <base href="/sw/"> -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <app-root> </app-root>
@@ -15,13 +17,13 @@
   navigator.serviceWorker.register('/sw/sw.js')
     .then(reg => {
       console.log('SW registered!', reg)
-      Notification.requestPermission().then((result) => {
-        if (result == 'granted'){
-          navigator.serviceWorker.ready.then((registration) => {
-           registration.showNotification('Notification with servicework');
-          })
-        }
-      })
+      // Notification.requestPermission().then((result) => {
+      //   if (result == 'granted'){
+      //     navigator.serviceWorker.ready.then((registration) => {
+      //      registration.showNotification('Notification with servicework');
+      //     })
+      //   }
+      // })
     })
     .catch(err => console.log('Boo!', err));
 </script>

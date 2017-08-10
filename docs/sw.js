@@ -28,16 +28,16 @@ self.addEventListener('fetch', function(event) {
 
             
 
-           registration.showNotification("New email", {
-                "body": "Did you make a $1,000,000 purchase at Dr. Evil...",
-                "icon": "images/ccard.png",
-                "vibrate": [200, 100, 200, 100, 200, 100, 400],
-                "tag": "request",
-                "actions": [
-                    { "action": "yes", "title": "Yes", "icon": "images/yes.png" },
-                    { "action": "no", "title": "No", "icon": "images/no.png" }
-                ]
-            });
+        //    registration.showNotification("New email", {
+        //         "body": "Did you make a $1,000,000 purchase at Dr. Evil...",
+        //         "icon": "images/ccard.png",
+        //         "vibrate": [200, 100, 200, 100, 200, 100, 400],
+        //         "tag": "request",
+        //         "actions": [
+        //             { "action": "yes", "title": "Yes", "icon": "images/yes.png" },
+        //             { "action": "no", "title": "No", "icon": "images/no.png" }
+        //         ]
+        //     });
             
             
           return response;
@@ -60,10 +60,10 @@ self.addEventListener('fetch', function(event) {
             }
         ).then(function () {
 
-            registration.showNotification("New email", {
-                body: "Cached all files",
-                tag: "new-email"
-            });
+            // registration.showNotification("New email", {
+            //     body: "Cached all files",
+            //     tag: "new-email"
+            // });
         })
 
         return fetch(event.request);
@@ -73,7 +73,7 @@ self.addEventListener('fetch', function(event) {
 });
 
 
-
+/*
 
 self.addEventListener('notificationclick', function(event) {
   
@@ -97,4 +97,4 @@ self.addEventListener('notificationclick', function(event) {
     // of the install handler.
     //new WindowClient('/');
   }
-});
+});*/
