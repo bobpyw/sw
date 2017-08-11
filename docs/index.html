@@ -39,7 +39,7 @@
       console.log('SW registered!', reg)
 
       messaging = firebase.messaging();
-      messaging.useServiceWork(reg);
+      messaging.useServiceWorker(reg);
       
       // Notification.requestPermission().then((result) => {
       //   if (result == 'granted'){
