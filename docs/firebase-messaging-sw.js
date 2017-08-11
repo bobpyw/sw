@@ -28,7 +28,7 @@ const messaging = firebase.messaging();
     const notificationTitle = 'Background Message Title';
     const notificationOptions = {
       body: 'Background Message bod2y.',
-      icon: '/assets/launcher-icon-1x.png'
+      icon: '/sw/assets/launcher-icon-1x.png'
     };
   
     return self.registration.showNotification(notificationTitle, notificationOptions);
