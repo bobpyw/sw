@@ -15,7 +15,7 @@
 </body>
 
 
-<!--<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -27,7 +27,7 @@
     messagingSenderId: "85893849466"
   };
   firebase.initializeApp(config);
-</script> -->
+</script>
 
 
 <script>
@@ -38,6 +38,8 @@
     .then(reg => {
       console.log('SW registered!', reg)
 
+      messaging = firebase.messaging();
+      messaging.useServiceWork(reg);
       
       // Notification.requestPermission().then((result) => {
       //   if (result == 'granted'){
