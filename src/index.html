@@ -15,7 +15,7 @@
 </body>
 
 
-<!-- <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+<!--<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -34,9 +34,11 @@
 
   //const messaging = firebase.messaging();
 
-  navigator.serviceWorker.register('/sw/firebase-messaging-sw.js')
+  navigator.serviceWorker.register('/sw/firebase-messaging-sw.js', {scope: "/sw/firebase-cloud-messaging-push-scope"})
     .then(reg => {
       console.log('SW registered!', reg)
+
+      
       // Notification.requestPermission().then((result) => {
       //   if (result == 'granted'){
       //     navigator.serviceWorker.ready.then((registration) => {

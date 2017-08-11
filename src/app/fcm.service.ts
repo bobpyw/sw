@@ -10,6 +10,10 @@ export class FCMService {
 
     constructor(@Inject(FirebaseApp) private _firebaseApp: firebase.app.App) {
 
+    
+
+
+
         this._messaging = firebase.messaging(this._firebaseApp);
         this._messaging.requestPermission()
             .then((result) => {
@@ -63,6 +67,9 @@ export class FCMService {
         this._messaging.onMessage((payload) => {
           console.log("Message received. ", payload);
         })
+        
+
+        
     }
 
     private isTokenSentToServer() {

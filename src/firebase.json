@@ -1,0 +1,8 @@
+{
+    "hosting": {
+      "public": "./sw/",
+      "ignore": [
+        "firebase.json"
+      ]
+    }
+  }
