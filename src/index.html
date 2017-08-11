@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Sw</title>
-  <base href="/">
+  <base href="/sw/">
   <!-- <base href="/sw/"> -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,7 +34,7 @@
 
   //const messaging = firebase.messaging();
 
-  navigator.serviceWorker.register('/firebase-messaging-sw.js')
+  navigator.serviceWorker.register('/sw/firebase-messaging-sw.js')
     .then(reg => {
       console.log('SW registered!', reg)
       // Notification.requestPermission().then((result) => {
