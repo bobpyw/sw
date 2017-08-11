@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Sw</title>
-  <base href="/sw/">
+  <base href="/">
   <!-- <base href="/sw/"> -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,8 +13,28 @@
 <body>
   <app-root> </app-root>
 </body>
+
+
+<!-- <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script>
-  navigator.serviceWorker.register('/sw/sw.js')
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDNzAyWj4hqvwDjjKsNxeQO25nyJpczFxM",
+    authDomain: "myproject-b53cc.firebaseapp.com",
+    databaseURL: "https://myproject-b53cc.firebaseio.com",
+    projectId: "myproject-b53cc",
+    storageBucket: "",
+    messagingSenderId: "85893849466"
+  };
+  firebase.initializeApp(config);
+</script> -->
+
+
+<script>
+
+  //const messaging = firebase.messaging();
+
+  navigator.serviceWorker.register('/firebase-messaging-sw.js')
     .then(reg => {
       console.log('SW registered!', reg)
       // Notification.requestPermission().then((result) => {
@@ -24,7 +44,14 @@
       //     })
       //   }
       // })
+
+      // navigator.serviceWorker.messaging.onMessage(function(payload) {
+      //   console.log("Message received. ", payload);
+      //   // ...
+      // });
+
     })
     .catch(err => console.log('Boo!', err));
 </script>
+<!--  -->
 </html>
