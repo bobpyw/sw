@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Sw</title>
-  <base href="/sw/">
+  <base href="/">
   <!-- <base href="/sw/"> -->
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@
 <script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
 
 
-<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script>
   // Initialize Firebase
   var config = {
@@ -27,16 +27,17 @@
     messagingSenderId: "85893849466"
   };
   firebase.initializeApp(config);
-</script>
+</script> -->
 
 
 <script>
 
   //const messaging = firebase.messaging();
 
-  navigator.serviceWorker.register('/sw/firebase-messaging-sw.js')
+  navigator.serviceWorker.register('./sw/sw.js')
     .then(reg => {
       console.log('SW registered!', reg)
+      
 
       // messaging = firebase.messaging();
       // messaging.useServiceWorker(reg);
