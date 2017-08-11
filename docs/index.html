@@ -34,12 +34,12 @@
 
   //const messaging = firebase.messaging();
 
-  navigator.serviceWorker.register('/sw/firebase-messaging-sw.js', {scope: "/sw/firebase-cloud-messaging-push-scope"})
+  navigator.serviceWorker.register('/sw/firebase-messaging-sw.js')
     .then(reg => {
       console.log('SW registered!', reg)
 
-      messaging = firebase.messaging();
-      messaging.useServiceWorker(reg);
+      // messaging = firebase.messaging();
+      // messaging.useServiceWorker(reg);
       
       // Notification.requestPermission().then((result) => {
       //   if (result == 'granted'){
