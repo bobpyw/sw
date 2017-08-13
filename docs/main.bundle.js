@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<p>Hello world</p>\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<p>Hello world</p>\r\n\r\n"
 
 /***/ }),
 
@@ -151,54 +151,59 @@ var FCMService = (function () {
     function FCMService(_firebaseApp) {
         var _this = this;
         this._firebaseApp = _firebaseApp;
-        this._messaging = __WEBPACK_IMPORTED_MODULE_2_firebase__["messaging"](this._firebaseApp);
-        this._messaging.requestPermission()
-            .then(function (result) {
-            if (result == 'granted') {
-                navigator.serviceWorker.ready.then(function (registration) {
-                    registration.showNotification('Notification with servicework');
-                });
-            }
-        })
-            .catch(function (error) {
-            console.log('Error: ', error);
-        });
-        this._messaging.getToken()
-            .then(function (currentToken) {
-            if (currentToken) {
-                _this.sendTokenToServer(currentToken);
-                _this.updateUIForPushEnabled(currentToken);
-            }
-            else {
-                // Show permission request.
-                console.log('No Instance ID token available. Request permission to generate one.');
-                // Show permission UI.
-                _this.updateUIForPushPermissionRequired();
-                _this.setTokenSentToServer(false);
-            }
-        })
-            .catch(function (err) {
-            console.log('An error occurred while retrieving token. ', err);
-            _this.setTokenSentToServer(false);
-        });
-        this._messaging.onTokenRefresh(function () {
+        navigator.serviceWorker.register('./sw.js')
+            .then(function (registration) {
+            _this._messaging = __WEBPACK_IMPORTED_MODULE_2_firebase__["messaging"](_this._firebaseApp);
+            _this._messaging.useServiceWorker(registration);
+            _this._messaging.requestPermission()
+                .then(function (result) {
+                if (result == 'granted') {
+                    navigator.serviceWorker.ready.then(function (registration) {
+                        registration.showNotification('Notification with servicework');
+                    });
+                }
+            })
+                .catch(function (error) {
+                console.log('Error: ', error);
+            });
             _this._messaging.getToken()
-                .then(function (refreshedToken) {
-                window.prompt('Token refreshed.', refreshedToken);
-                // Indicate that the new Instance ID token has not yet been sent to the
-                // app server.
-                this.setTokenSentToServer(false);
-                // Send Instance ID token to app server.
-                this.sendTokenToServer(refreshedToken);
-                // ...
+                .then(function (currentToken) {
+                if (currentToken) {
+                    _this.sendTokenToServer(currentToken);
+                    _this.updateUIForPushEnabled(currentToken);
+                }
+                else {
+                    // Show permission request.
+                    console.log('No Instance ID token available. Request permission to generate one.');
+                    // Show permission UI.
+                    _this.updateUIForPushPermissionRequired();
+                    _this.setTokenSentToServer(false);
+                }
             })
                 .catch(function (err) {
-                console.log('Unable to retrieve refreshed token ', err);
+                console.log('An error occurred while retrieving token. ', err);
+                _this.setTokenSentToServer(false);
             });
-        });
-        this._messaging.onMessage(function (payload) {
-            console.log("Message received. ", payload);
-        });
+            _this._messaging.onTokenRefresh(function () {
+                _this._messaging.getToken()
+                    .then(function (refreshedToken) {
+                    window.prompt('Token refreshed.', refreshedToken);
+                    // Indicate that the new Instance ID token has not yet been sent to the
+                    // app server.
+                    this.setTokenSentToServer(false);
+                    // Send Instance ID token to app server.
+                    this.sendTokenToServer(refreshedToken);
+                    // ...
+                })
+                    .catch(function (err) {
+                    console.log('Unable to retrieve refreshed token ', err);
+                });
+            });
+            _this._messaging.onMessage(function (payload) {
+                console.log("Message received. ", payload);
+            });
+        })
+            .catch(function (err) { return console.log('Boo!', err); });
     }
     FCMService.prototype.isTokenSentToServer = function () {
         return this.sentToServer;

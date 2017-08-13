@@ -34,29 +34,39 @@
 
   //const messaging = firebase.messaging();
 
-  navigator.serviceWorker.register('./sw.js')
-    .then(reg => {
-      console.log('SW registered!', reg)
+  // navigator.serviceWorker.register('./sw.js')
+  //   .then(reg => {
+  //     console.log('SW registered!', reg)
       
-
-      // messaging = firebase.messaging();
-      // messaging.useServiceWorker(reg);
       
-      // Notification.requestPermission().then((result) => {
-      //   if (result == 'granted'){
-      //     navigator.serviceWorker.ready.then((registration) => {
-      //      registration.showNotification('Notification with servicework');
-      //     })
-      //   }
-      // })
+  //     // messaging = firebase.messaging();
+  //     //messaging.useServiceWorker(reg);
+  //     // messaging.setBackgroundMessageHandler(function(payload) {
+  //     //   console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  //     //   // Customize notification here
+  //     //   const notificationTitle = 'Background Message Title';
+  //     //   const notificationOptions = {
+  //     //     body: 'Background Message bod2y.',
+  //     //     icon: '/sw/assets/launcher-icon-1x.png'
+  //     //   };
+      
+  //     //   return self.registration.showNotification(notificationTitle, notificationOptions);
+  //     // });
+  //     // Notification.requestPermission().then((result) => {
+  //     //   if (result == 'granted'){
+  //     //     navigator.serviceWorker.ready.then((registration) => {
+  //     //      registration.showNotification('Notification with servicework');
+  //     //     })
+  //     //   }
+  //     // })
 
-      // navigator.serviceWorker.messaging.onMessage(function(payload) {
-      //   console.log("Message received. ", payload);
-      //   // ...
-      // });
+  //     // navigator.serviceWorker.messaging.onMessage(function(payload) {
+  //     //   console.log("Message received. ", payload);
+  //     //   // ...
+  //     // });
 
-    })
-    .catch(err => console.log('Boo!', err));
+  //   })
+  //   .catch(err => console.log('Boo!', err));
 </script>
 <!--  -->
 </html>

@@ -11,62 +11,68 @@ export class FCMService {
     constructor(@Inject(FirebaseApp) private _firebaseApp: firebase.app.App) {
 
 
+        navigator.serviceWorker.register('./sw.js')
+          .then(registration => {
 
+            this._messaging = firebase.messaging(this._firebaseApp);
+            this._messaging.useServiceWorker(registration);
 
-        this._messaging = firebase.messaging(this._firebaseApp);
-        
-        this._messaging.requestPermission()
-            .then((result) => {
-
-                if (result == 'granted'){
-                    navigator.serviceWorker.ready.then((registration) => {
-                     registration.showNotification('Notification with servicework');
-                    })
-                  }
-             })
-            .catch((error) => { 
-                console.log('Error: ', error);
-             });
-
-        this._messaging.getToken()
-             .then((currentToken) => {
-               if (currentToken) {
-                  this.sendTokenToServer(currentToken);
-                 this.updateUIForPushEnabled(currentToken);
-               } else {
-                 // Show permission request.
-                 console.log('No Instance ID token available. Request permission to generate one.');
-                 // Show permission UI.
-                 this.updateUIForPushPermissionRequired();
-                 this.setTokenSentToServer(false);
-               }
-             })
-             .catch((err) => {
-               console.log('An error occurred while retrieving token. ', err);
-               this.setTokenSentToServer(false);
-             });
-
-        this._messaging.onTokenRefresh(() => {
-              this._messaging.getToken()
-              .then(function(refreshedToken) {
-                window.prompt('Token refreshed.', refreshedToken);
-                // Indicate that the new Instance ID token has not yet been sent to the
-                // app server.
-                this.setTokenSentToServer(false);
-                // Send Instance ID token to app server.
-                this.sendTokenToServer(refreshedToken);
-                // ...
-              })
-              .catch(function(err) {
-                console.log('Unable to retrieve refreshed token ', err);
-              });
-
+            this._messaging.requestPermission()
+                .then((result) => {
+    
+                    if (result == 'granted'){
+                        navigator.serviceWorker.ready.then((registration) => {
+                         registration.showNotification('Notification with servicework');
+                        })
+                      }
+                 })
+                .catch((error) => { 
+                    console.log('Error: ', error);
+                 });
+    
+            this._messaging.getToken()
+                 .then((currentToken) => {
+                   if (currentToken) {
+                      this.sendTokenToServer(currentToken);
+                     this.updateUIForPushEnabled(currentToken);
+                   } else {
+                     // Show permission request.
+                     console.log('No Instance ID token available. Request permission to generate one.');
+                     // Show permission UI.
+                     this.updateUIForPushPermissionRequired();
+                     this.setTokenSentToServer(false);
+                   }
+                 })
+                 .catch((err) => {
+                   console.log('An error occurred while retrieving token. ', err);
+                   this.setTokenSentToServer(false);
+                 });
+    
+            this._messaging.onTokenRefresh(() => {
+                  this._messaging.getToken()
+                  .then(function(refreshedToken) {
+                    window.prompt('Token refreshed.', refreshedToken);
+                    // Indicate that the new Instance ID token has not yet been sent to the
+                    // app server.
+                    this.setTokenSentToServer(false);
+                    // Send Instance ID token to app server.
+                    this.sendTokenToServer(refreshedToken);
+                    // ...
+                  })
+                  .catch(function(err) {
+                    console.log('Unable to retrieve refreshed token ', err);
+                  });
+    
+                })
+    
+    
+            this._messaging.onMessage((payload) => {
+              console.log("Message received. ", payload);
             })
 
+          })
 
-        this._messaging.onMessage((payload) => {
-          console.log("Message received. ", payload);
-        })
+          .catch(err => console.log('Boo!', err));
         
 
         
