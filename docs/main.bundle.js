@@ -473,7 +473,7 @@ var DemoService = (function () {
     //private acct:Account;
     function DemoService(http) {
         this.http = http;
-        this.baseUrl = 'http://34.193.246.80/api'; //'http://127.0.0.1:8000/api'
+        this.baseUrl = 'https://34.193.246.80/api'; //'http://127.0.0.1:8000/api'
     }
     DemoService.prototype.retrieve = function (account_id) {
         return this.http.get(this.baseUrl + '/accounts/' + account_id)
@@ -580,7 +580,7 @@ var FcmService = (function () {
         var _this = this;
         this.http = http;
         this._firebaseApp = _firebaseApp;
-        this.baseUrl = 'http://34.193.246.80/api'; //'http://127.0.0.1:8000/api';
+        this.baseUrl = 'https://34.193.246.80/api'; //'http://127.0.0.1:8000/api';
         this.currentToken = new __WEBPACK_IMPORTED_MODULE_4_rxjs_BehaviorSubject__["BehaviorSubject"]('');
         navigator.serviceWorker.register('./sw.js')
             .then(function (registration) {
